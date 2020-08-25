@@ -121,6 +121,7 @@ typedef struct {
     } pending_mode;
     DisableLigature disable_ligatures;
     PyObject *marker;
+    hyperlink_id_type active_hyperlink_id;
 } Screen;
 
 
@@ -204,6 +205,8 @@ bool screen_history_scroll(Screen *self, int amt, bool upwards);
 Line* screen_visual_line(Screen *self, index_type y);
 unsigned long screen_current_char_width(Screen *self);
 void screen_mark_url(Screen *self, index_type start_x, index_type start_y, index_type end_x, index_type end_y);
+bool parse_osc_8(char *buf, char **id, char **url);
+void set_active_hyperlink(Screen*, char*, char*);
 void screen_handle_graphics_command(Screen *self, const GraphicsCommand *cmd, const uint8_t *payload);
 bool screen_open_url(Screen*);
 void screen_dirty_sprite_positions(Screen *self);
